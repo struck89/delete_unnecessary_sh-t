@@ -68,29 +68,11 @@ def gethugespecificfiles(dictfilesize,threshold=100,extensions=[]):
                 hugefiles.append(FILE)
     return hugefiles
 
-def isdict(a):
-    if isinstance(a,dict):
-        return True
-    else:
-        return False
-#    try:
-#        b=a.copy()
-#        b['fdsfgrsdgsrgr']=1
-#        return True
-#    except:
-#        return False
-
-def islist(a):
-    if isinstance(a,list):
-        return True
-    else:
-        return False
-#    try:
-#        b=a[:]
-#        b.append('gfdgsdfgdf')
-#        return True
-#    except:
-#        return False
+#def isdict(a):
+#    return isinstance(a,dict)
+#
+#def islist(a):
+#    return isinstance(a,list)
 
 def getfilesthatgotbigger(dictofprevsizes,listoffilestocheck):
     biggerfiles=[]
@@ -114,10 +96,13 @@ def getfilesthatdidntchangesize(dictofprevsizes,listoffilestocheck):
 
 def remove(files,extensions):
     for FILE in files:
-        if FILE[-3:] in extensions:
-            os.remove(FILE)
-            return True
-        else:
+        try:
+            if FILE[-3:] in extensions:
+                os.remove(FILE)
+                return True
+            else:
+                return False
+        except:
             return False
 
 #%% 
